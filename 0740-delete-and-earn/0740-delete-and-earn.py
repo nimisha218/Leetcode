@@ -3,7 +3,7 @@ class Solution:
 
         nums.sort()
 
-        dp = [0] * len(nums)
+        
 
         freq = {}
 
@@ -14,6 +14,7 @@ class Solution:
                 freq[el] = 1
        
         nums = list(set(nums))
+        dp = [0] * len(nums)
 
         if len(nums) == 1:
             return nums[0] * freq[nums[0]]
