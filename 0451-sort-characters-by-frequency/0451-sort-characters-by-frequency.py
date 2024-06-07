@@ -1,20 +1,23 @@
 from collections import defaultdict
+import heapq
 
 class Solution:
     def frequencySort(self, s: str) -> str:
         
-        d = defaultdict(int)
-
-        for el in s:
-            d[el] += 1
+        freq = Counter(s)
         
-        d = dict(sorted(d.items(), key=lambda item: item[1], reverse=True))
+        maxHeap = []
+        heapq.heapify(maxHeap)
 
-        s = ""
+        for key in freq:
+            heapq.heappush(maxHeap, [-freq[key], key])
 
-        for key in d:
-            while d[key] != 0:
-                s += key
-                d[key] -= 1
+        result = []
+
+        while maxHeap:
+
+            freq, character = heapq.heappop(maxHeap)
+            freq = -freq
+            result.append(freq*character)
         
-        return s
+        return "".join(result)
