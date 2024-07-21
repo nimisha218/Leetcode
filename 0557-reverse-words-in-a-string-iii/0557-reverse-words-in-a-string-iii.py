@@ -1,23 +1,21 @@
 class Solution:
     def reverseWords(self, s: str) -> str:
 
-        # Convert the string into a list
         s_list = []
-        for ch in s:
-            s_list.append(ch)
+
+        for word in s:
+            s_list.append(word)
         
-        # Reverse the list
-        s_list = s_list[::-1]
+        s_list = s_list[-1::-1]
 
-        # Convert it to a string again
-        result = "".join(s_list)
+        s = "".join(s_list)
+        
+        s_list = s.split(" ")
 
-        result = result.split(" ")
+        s = s_list[-1::-1]
 
-        result = result[::-1]
-
-        result = " ".join(result)
-
-        return result
+        return " ".join(s)
+        
+        
 
         
