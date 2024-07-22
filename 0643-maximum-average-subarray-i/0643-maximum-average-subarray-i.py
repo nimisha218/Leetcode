@@ -2,21 +2,24 @@ class Solution:
     def findMaxAverage(self, nums: List[int], k: int) -> float:
         
         total = 0
-        # Build the first valid window
+
+        # Build the first window
         for i in range(k):
             total += nums[i]
-        
-        # Compute the average of the first valid window
-        avg = 0
-        avg = total / k
 
+        max_average = total / k
+
+        # Start sliding the window
         left = 0
-        # Start iterating over the next windows
-        for i in range(k, len(nums)):
+        right = k
 
-            total += nums[i]
+        while right < len(nums):
+
             total -= nums[left]
+            total += nums[right]
+            max_average = max(max_average, total / k)
             left += 1
-            avg = max(avg, total / k)
+            right += 1
         
-        return avg
+        return max_average
+
