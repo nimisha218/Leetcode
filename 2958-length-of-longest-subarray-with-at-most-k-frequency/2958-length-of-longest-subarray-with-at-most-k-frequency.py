@@ -3,30 +3,25 @@ from collections import defaultdict
 class Solution:
     def maxSubarrayLength(self, nums: List[int], k: int) -> int:
         
+        d = defaultdict(int)
+
         left = 0
-        right = 0
-
         ans = 0
-        curr_ans = 0
 
-        freq = defaultdict(int)
+        for right in range(len(nums)):
 
-        while right < len(nums):
-
-            num = nums[right]
-
-            freq[num] += 1
-            
-            # Check if it is an invalid window
-            while freq[num] > k:
-                # Update HashMap
-                freq[nums[left]] -= 1
+            if d[nums[right]] >= k: 
+                # Shrink the window from the left until we encounter nums[right]
+                while nums[left] != nums[right]:
+                    d[nums[left]] -= 1
+                    left += 1
+                d[nums[left]] -= 1
                 left += 1
-                curr_ans -= 1
             
-            right += 1
-            curr_ans += 1
-            ans = max(ans, curr_ans)
+            d[nums[right]] += 1
+            ans = max(ans, right - left + 1)
         
         return ans
 
+
+        
