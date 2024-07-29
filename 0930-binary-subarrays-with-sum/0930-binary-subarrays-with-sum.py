@@ -3,26 +3,28 @@ from collections import defaultdict
 class Solution:
     def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
 
-        # This is a Prefix Sum problem
+        prefix = [nums[0]]
+        for i in range(1, len(nums)):
+            prefix.append(prefix[-1] + nums[i])
+
+        d = defaultdict(int)
+        d[0] = 1
         ans = 0
-        currentSum = 0
 
-        freq = defaultdict(int)
+        for total in prefix:
 
-        for num in nums:
+            if (total - goal) in d:
+                ans += d[total-goal]
+                d[total] += 1
 
-            currentSum += num
-            
-            if currentSum == goal:
-                ans += 1
-            
-            if currentSum - goal in freq:
-                ans += freq[currentSum - goal]
-            
-            freq[currentSum] += 1
-        
+            else:
+                d[total] += 1
+
         return ans
+            
 
 
+            
+       
 
         
