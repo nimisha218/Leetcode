@@ -1,15 +1,19 @@
+from functools import cache
+
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         
-        # Initialize the dp arrau
-        dp = [1] * len(nums)
+        @cache
+        def dp(i):
 
-        # Base case is handled by default
+            # Base Case
+            ans = 1
 
-        # Recurrence Relation
-        for i in range(len(nums)):
             for j in range(i):
                 if nums[i] > nums[j]:
-                    dp[i] = max(dp[i], dp[j] + 1)
-        
-        return max(dp)
+                    ans = max(ans, dp(j) + 1)
+                
+            return ans
+
+        return max(dp(i) for i in range(len(nums)))
+    
