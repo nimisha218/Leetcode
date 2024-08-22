@@ -5,13 +5,19 @@ class Solution:
         
         d = defaultdict(int)
         d[0] = 1
-        
+
+        result = 0
+
         curr = 0
-        ans = 0
-        
+
         for num in nums:
-            curr += num % 2
-            ans += d[curr - k]
+            
+            if num % 2 == 1:
+                curr += 1
+            
+            result += d[curr - k]
+
             d[curr] += 1
+
+        return result
         
-        return ans 
