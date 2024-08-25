@@ -3,18 +3,16 @@ class Solution:
         
         def backtrack(curr):
 
-            # Base Case
             if len(curr) == len(nums):
                 result.append(curr[:])
                 return
             
-            # Iterative Case
             for num in nums:
                 if num not in curr:
                     curr.append(num)
                     backtrack(curr)
                     curr.pop()
-            
+
         result = []
         backtrack([])
         return result
