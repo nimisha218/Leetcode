@@ -6,11 +6,10 @@ class Solution:
         words = defaultdict(list)
 
         for word in strs:
-            c = [0] * 26
+            count = [0] * 26
             for ch in word:
-                c[ord(ch) - ord('a')] += 1
-            words[tuple(c)].append(word)
-        
-        return words.values()
+                count[ord(ch) - ord('a')] += 1
+            words[tuple(count)].append(word)
 
+        return words.values()
             
