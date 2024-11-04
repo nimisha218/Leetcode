@@ -3,11 +3,12 @@ from collections import defaultdict
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         
-        freq = defaultdict(int)
+        freq = set()
 
         for num in nums:
-            if freq[num] == 1:
+            if num in freq:
                 return True
-            freq[num] = 1
+            
+            freq.add(num)
         
         return False
