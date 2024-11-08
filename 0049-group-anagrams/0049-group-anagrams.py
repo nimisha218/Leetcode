@@ -2,7 +2,7 @@ from collections import defaultdict
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        
+
         words = defaultdict(list)
 
         for word in strs:
@@ -11,5 +11,9 @@ class Solution:
                 count[ord(ch) - ord('a')] += 1
             words[tuple(count)].append(word)
 
-        return words.values()
-            
+        result = []
+
+        for val in words.values():
+            result.append(val)
+        
+        return result
