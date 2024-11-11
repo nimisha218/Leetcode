@@ -1,14 +1,11 @@
-from collections import defaultdict
-
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         
-        freq = set()
+        seen = set()
 
         for num in nums:
-            if num in freq:
+            if num in seen:
                 return True
-            
-            freq.add(num)
+            seen.add(num)
         
         return False
