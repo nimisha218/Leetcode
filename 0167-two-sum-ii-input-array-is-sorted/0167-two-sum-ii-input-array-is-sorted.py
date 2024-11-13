@@ -6,13 +6,12 @@ class Solution:
 
         while left < right:
 
-            total = numbers[left] + numbers[right]
-
-            if total == target:
+            if numbers[left] + numbers[right] == target:
                 return [left + 1, right + 1]
             
-            if total > target:
+            elif numbers[left] + numbers[right] > target:
                 right -= 1
             
             else:
                 left += 1
+    
