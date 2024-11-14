@@ -3,16 +3,18 @@ class Solution:
         
         result = 0
 
+        freq = set()
+
         left = 0
-        c = set()
 
         for right in range(len(s)):
-
-            while s[right] in c:
-                c.remove(s[left])
+            
+            # Shrink the window
+            while s[right] in freq:
+                freq.remove(s[left])
                 left += 1
             
-            c.add(s[right])
+            freq.add(s[right])
 
             result = max(result, right - left + 1)
 
