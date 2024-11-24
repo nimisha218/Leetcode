@@ -4,22 +4,22 @@ class Solution:
         left = 0
         right = len(nums) - 1
 
-        result = nums[left]
+        result = float('inf')
 
         while left <= right:
 
-            if nums[left] < nums[right]:
-                # We have a sorted section! 
-                result = min(result, nums[left])
-                break
+            result = min(result, nums[left])
 
             mid = (left + right) // 2
             result = min(result, nums[mid])
 
-            if nums[mid] >= nums[left]:
-                left = mid + 1
+            if nums[mid] < nums[right]:
+                right = mid - 1
             
             else:
-                right = mid - 1
+                left = mid + 1
         
         return result
+
+
+            
