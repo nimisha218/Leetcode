@@ -4,42 +4,45 @@ class Solution:
         A = nums1
         B = nums2
 
+        # Force len(A) to be < len(B)
+        if len(A) > len(B):
+            A, B = B, A
+        
         total = len(A) + len(B)
         half = total // 2
 
-        # Force A to be < B
-        if len(A) > len(B):
-            A, B = B, A
-
-        # Initialize left and right pointers for A
+        # Compute the left partition of A
         left = 0
         right = len(A) - 1
 
+
         while True:
 
-            a_mid = (left + right) // 2
+            i = (left + right) // 2
 
-            b_mid = half - a_mid - 2 # -1 to offset the indexes
+            # Check if i is in bounds
+            a_left = A[i] if i >= 0 else float('-infinity')
+            a_right = A[i + 1] if (i + 1) < len(A) else float('infinity')
 
-            a_left = A[a_mid] if a_mid >= 0 else float("-infinity")
-            a_right = A[a_mid + 1] if (a_mid + 1) < len(A) else float("infinity")
-            b_left = B[b_mid] if b_mid >= 0 else float("-infinity")
-            b_right = B[b_mid + 1] if (b_mid + 1) < len(B) else float("infinity")
+            j = half - i - 2
 
-            # Right partition found
+            # Check if j is in bounds
+            b_left = B[j] if j >= 0 else float('-infinity')
+            b_right = B[j + 1] if (j + 1) < len(B) else float('infinity')
+
+            # Check if the left and right partitions are valid
             if a_left <= b_right and b_left <= a_right:
-                # Odd
+                # Compute the median
                 if total % 2:
                     return min(a_right, b_right)
-                #Even
-                else:
-                    return (max(a_left, b_left) + min(a_right, b_right)) / 2
-
+                return (max(a_left, b_left) + min(b_right, a_right)) / 2
+            
             elif a_left > b_right:
-                right = a_mid - 1
+                right = i - 1
             
             else:
-                left = a_mid + 1
+                left = i + 1
+
 
             
 
