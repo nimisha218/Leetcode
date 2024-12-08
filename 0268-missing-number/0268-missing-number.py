@@ -3,7 +3,18 @@ class Solution:
         
         n = len(nums)
 
-        expected_sum = n * (n + 1) // 2
-        actual_sum = sum(nums)
+        currSum = sum(nums)
 
-        return expected_sum - actual_sum
+        expSum = sum([num for num in range(n+1)])
+
+        return expSum - currSum
+
+        # res = 0
+
+        # for i in range(len(nums) + 1):
+        #     res = res ^ i
+        
+        # for num in nums:
+        #     res = res ^ num
+        
+        # return res
